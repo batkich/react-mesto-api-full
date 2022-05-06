@@ -10,8 +10,6 @@ const { celebrate, Joi } = require('celebrate');
 
 const { errors } = require('celebrate');
 
-const { requestLogger, errorLogger } = require('./middlewares/logger');
-
 const Notfound = require('./errors/notfound');
 
 const userRout = require('./routs/userRout');
@@ -24,16 +22,40 @@ const { PORT = 3000 } = process.env;
 
 const app = express();
 
+const allowedCors = [
+  'https://santyagobatkich.students.nomoredomains.xyz',
+  'http://santyagobatkich.students.nomoredomains.xyz',
+  'localhost:3000',
+];
+
 const {
   userCreate, login,
 } = require('./controllers/users');
 
 mongoose.connect('mongodb://localhost:27017/mestodb');
 
+// eslint-disable-next-line consistent-return
+app.use((req, res, next) => {
+  const { origin } = req.headers;
+
+  if (allowedCors.includes(origin)) {
+    res.header('Access-Control-Allow-Origin', origin);
+  }
+
+  const { method } = req;
+  const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
+  const requestHeaders = req.headers['access-control-request-headers'];
+  if (method === 'OPTIONS') {
+    res.header('Access-Control-Allow-Methods', DEFAULT_ALLOWED_METHODS);
+    res.header('Access-Control-Allow-Headers', requestHeaders);
+    return res.end();
+  }
+
+  next();
+});
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(requestLogger);
 app.post('/signin', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
@@ -56,8 +78,6 @@ app.use('/cards', cardRout);
 app.use('/', () => {
   throw new Notfound('Нет такой страницы');
 });
-
-app.use(errorLogger);
 
 app.use(errors());
 
