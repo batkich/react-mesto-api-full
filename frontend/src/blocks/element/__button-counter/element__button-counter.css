@@ -1,0 +1,14 @@
+.element__button-counter {
+ box-sizing: border-box;
+ color:black;
+ font-family: Inter, Arial, sans-serif;
+ font-style: normal;
+ font-weight: normal;
+ font-size: 13px;
+ line-height: 16px;
+ align-self: center;
+ padding-top: 3px;
+ padding-bottom: 0;
+ padding-right: 0;
+ padding-left: 0;
+}

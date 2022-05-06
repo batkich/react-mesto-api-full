@@ -1,0 +1,17 @@
+.content {
+  margin: 0;
+  grid-area: content;
+  box-sizing: border-box;
+  padding: 0;
+  width: 100%;
+  max-width: 880px;
+
+}
+
+@media all and (max-width: 625px) {
+  .content {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+}

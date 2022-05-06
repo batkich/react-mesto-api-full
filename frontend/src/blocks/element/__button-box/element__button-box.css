@@ -1,0 +1,4 @@
+.element__button-box {
+  display:flex;
+  flex-direction: column;
+}

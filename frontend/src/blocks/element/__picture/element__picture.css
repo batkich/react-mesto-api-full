@@ -1,0 +1,11 @@
+.element__picture {
+  margin: 0;
+  width: 282px;
+  height: 282px;
+  object-fit: cover;
+  box-sizing: border-box;
+  border-radius: 10px 10px 0 0;
+  padding: 0;
+  overflow: hidden;
+  display: block;
+}

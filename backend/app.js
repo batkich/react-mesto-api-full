@@ -10,6 +10,8 @@ const { celebrate, Joi } = require('celebrate');
 
 const { errors } = require('celebrate');
 
+const { requestLogger, errorLogger } = require('./middlewares/logger');
+
 const Notfound = require('./errors/notfound');
 
 const userRout = require('./routs/userRout');
@@ -31,6 +33,7 @@ mongoose.connect('mongodb://localhost:27017/mestodb');
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(requestLogger);
 app.post('/signin', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
@@ -53,6 +56,8 @@ app.use('/cards', cardRout);
 app.use('/', () => {
   throw new Notfound('Нет такой страницы');
 });
+
+app.use(errorLogger);
 
 app.use(errors());
 

@@ -1,0 +1,15 @@
+.popup__input_type_sign{
+    margin: 0;
+    width: 100%;
+    box-sizing: border-box;
+    border: 0;
+    border-bottom: 2px solid #CCCCCC;
+    font-family: Inter, Arial, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    color: #ffffff;
+    margin-top: 30px;
+    background-color: #000000;
+}

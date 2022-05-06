@@ -1,0 +1,11 @@
+.popup__form_type_avatar {
+  max-width: 380px;
+  padding-bottom: 37px;
+  width: 100%;
+}
+
+@media all and (max-width: 625px) {
+  .popup__form_type_avatar {
+    max-width: 250px;
+  }
+}

@@ -1,0 +1,10 @@
+.link_type_sign{
+    margin-left: 0 auto;
+    text-align: center;
+    align-self: center;
+    padding-top: 15px;
+}
+
+.link_type_sign:hover{
+    color:#CCCCCC;
+}

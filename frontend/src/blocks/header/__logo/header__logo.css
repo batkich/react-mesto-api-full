@@ -1,0 +1,23 @@
+.header__logo {
+  margin: 0;
+  width: 142px;
+  height: 33px;
+  margin-bottom: 41px;
+  background-image: url(../../../images/logo.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.header__logo:hover {
+  opacity: 0.5;
+}
+
+@media all and (max-width: 625px) {
+  .header__logo {
+    margin-left: 27px;
+    max-width: 103px;
+    margin-bottom: 31px;
+  }
+}

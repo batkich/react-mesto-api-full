@@ -1,0 +1,32 @@
+.profile__link-edit {
+  margin: 0;
+  grid-row: 1/2;
+  grid-column: 2/3;
+  background-image: url(../../../images/EditButton.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 24px;
+  background-position: 50% 75%;
+  max-height: 24px;
+  padding-top: 45px;
+  background-color: transparent;
+  border: 0;
+  outline: none;
+  cursor: pointer;
+  padding-bottom: 0;
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.profile__link-edit:hover {
+  opacity: 0.6;
+}
+
+@media all and (max-width: 700px) {
+  .profile__link-edit {
+    background-image: url(../../../images/EditButton-small.svg);
+    width: 18px;
+    background-position: center;
+    padding-top: 50%;
+  }
+}

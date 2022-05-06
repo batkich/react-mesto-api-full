@@ -1,0 +1,11 @@
+.popup__container_type_auth{
+    width: 35vw;
+    height: 35vh;
+  }
+  
+  @media all and (max-width: 450px) {
+    .popup__container_type_auth {
+      width: 240px;
+      height: 299px;
+    }
+  }

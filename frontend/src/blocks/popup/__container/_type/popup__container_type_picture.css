@@ -1,0 +1,18 @@
+.popup__container_type_picture {
+  width: 75vw;
+  height: 75vh;
+}
+
+@media all and (max-width: 625px) {
+  .popup__container_type_picture {
+    width: 433px;
+    height: 540px;
+  }
+}
+
+@media all and (max-width: 450px) {
+  .popup__container_type_picture {
+    width: 240px;
+    height: 299px;
+  }
+}

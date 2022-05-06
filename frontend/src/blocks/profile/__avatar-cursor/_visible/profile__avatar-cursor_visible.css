@@ -1,0 +1,4 @@
+.profile__avatar-cursor_visible{
+  display: block;
+  z-index: 3;
+}
