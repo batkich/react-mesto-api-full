@@ -25,7 +25,8 @@ const app = express();
 const allowedCors = [
   'https://santyagobatkich.students.nomoredomains.xyz',
   'http://santyagobatkich.students.nomoredomains.xyz',
-  'localhost:3000',
+  'http://localhost:3000',
+  'https://localhost:3000',
 ];
 
 const {
