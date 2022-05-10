@@ -4,6 +4,8 @@ const jwt = require('jsonwebtoken');
 
 const User = require('../models/user');
 
+const { NODE_ENV, JWT_SECRET } = process.env;
+
 const BadRequest = require('../errors/badRequest');
 const Unauthorized = require('../errors/unauthorized');
 const Notfound = require('../errors/notfound');
@@ -109,10 +111,10 @@ const updateAvatar = (req, res, next) => {
       }
       const {
         // eslint-disable-next-line no-shadow
-        avatar,
+        avatar, name, about,
       } = user;
       res.send({
-        avatar,
+        avatar, name, about,
       });
     })
     // eslint-disable-next-line consistent-return
@@ -128,7 +130,11 @@ const login = (req, res, next) => {
 
   return User.findUserByCredentials(email, password)
     .then((user) => {
-      const token = jwt.sign({ _id: user._id }, 'topsecret-token', { expiresIn: '7d' });
+      const token = jwt.sign(
+        { _id: user._id },
+        NODE_ENV === 'production' ? JWT_SECRET : 'topsecret-token',
+        { expiresIn: '7d' },
+      );
       res.cookie('jwt', token, { maxAge: 3600000 * 24 * 7, httpOnly: true });
       res.send({ token });
     })

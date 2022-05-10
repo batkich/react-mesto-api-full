@@ -1,17 +1,17 @@
-export const BASE_URL = 'https://auth.nomoreparties.co';
+export const BASE_URL = 'http://santyagobatkich.students.nomoredomains.work';
 
 export const register = (password, email) => {
   return fetch(`${BASE_URL}/signup`, {
     method: 'POST',
     headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
+       'Accept': 'application/json',
+       'Content-Type': 'application/json',
     },
     body: JSON.stringify({ password, email })
   })
     .then((response) => {
       try {
-        if (response.status === 201) {
+        if (response.status === 200) {
           return response.json();
         }
       } catch (e) {
@@ -27,6 +27,7 @@ export const register = (password, email) => {
 export const authorize = (password, email) => {
   return fetch(`${BASE_URL}/signin`, {
     method: 'POST',
+    credentials: 'include',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
@@ -43,15 +44,16 @@ export const authorize = (password, email) => {
     .catch(err => console.log(err))
 };
 
-export const getContent = (token) => {
+export const getContent = () => {
   return fetch(`${BASE_URL}/users/me`, {
     method: 'GET',
+    credentials: 'include',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`,
+
     }
   })
     .then(res => res.json())
     .then(data => data)
-} 
+}

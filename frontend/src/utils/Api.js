@@ -2,6 +2,7 @@ class Api {
   constructor(options) {
     this.baseUrl = options.baseUrl;
     this.headers = options.headers;
+    this.credentials = options.credentials;
   }
 
   _checkResponse(res) {
@@ -13,6 +14,7 @@ class Api {
 
   getProfileInfo() {
     return fetch(`${this.baseUrl}/users/me`, {
+      credentials: this.credentials,
       headers: this.headers,
     })
       .then(this._checkResponse);
@@ -20,6 +22,7 @@ class Api {
 
   getInitialCards() {
     return fetch(`${this.baseUrl}/cards`, {
+      credentials: this.credentials,
       headers: this.headers,
     })
       .then(this._checkResponse);
@@ -28,6 +31,7 @@ class Api {
   setProfileInfo(item) {
     return fetch(`${this.baseUrl}/users/me`, {
       method: 'PATCH',
+      credentials: this.credentials,
       headers: this.headers,
       body: JSON.stringify({
         name: item.name,
@@ -40,6 +44,7 @@ class Api {
   setNewCard(data) {
     return fetch(`${this.baseUrl}/cards`, {
       method: 'POST',
+      credentials: this.credentials,
       headers: this.headers,
       body: JSON.stringify({
         name: data.name,
@@ -52,14 +57,16 @@ class Api {
   deleteCard(item) {
     return fetch(`${this.baseUrl}/cards/${item}`, {
       method: 'DELETE',
+      credentials: this.credentials,
       headers: this.headers,
     })
       .then(this._checkResponse);
   }
 
-  changeLikeCardStatus(item, isLiked) {
-    return fetch(`${this.baseUrl}/cards/likes/${item}`, {
+  changeLikeCardStatus(item, isLiked,) {
+    return fetch(`${this.baseUrl}/cards/${item}/likes/`, {
       method: isLiked ? 'PUT' : 'DELETE',
+      credentials: this.credentials,
       headers: this.headers,
     })
       .then(this._checkResponse);
@@ -68,6 +75,7 @@ class Api {
   setNewAvatar(item) {
     return fetch(`${this.baseUrl}/users/me/avatar`, {
       method: 'PATCH',
+      credentials: this.credentials,
       headers: this.headers,
       body: JSON.stringify({
         avatar: item.avatar,
@@ -77,11 +85,10 @@ class Api {
   }
 }
 
-
 const api = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-27',
+  baseUrl: 'http://santyagobatkich.students.nomoredomains.work',
+  credentials: 'include',
   headers: {
-    authorization: '235ae6c2-9d59-4d94-a816-03a2b688c17b',
     'Content-Type': 'application/json',
   }
 });

@@ -1,5 +1,7 @@
 const express = require('express');
 
+require('dotenv').config();
+
 const mongoose = require('mongoose');
 
 const bodyParser = require('body-parser');
@@ -17,6 +19,8 @@ const userRout = require('./routs/userRout');
 const cardRout = require('./routs/cardRout');
 
 const auth = require('./middlewares/auth');
+
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const { PORT = 3000 } = process.env;
 
@@ -41,6 +45,7 @@ app.use((req, res, next) => {
 
   if (allowedCors.includes(origin)) {
     res.header('Access-Control-Allow-Origin', origin);
+    res.header('Access-Control-Allow-Credentials', true);
   }
 
   const { method } = req;
@@ -48,6 +53,7 @@ app.use((req, res, next) => {
   const requestHeaders = req.headers['access-control-request-headers'];
   if (method === 'OPTIONS') {
     res.header('Access-Control-Allow-Methods', DEFAULT_ALLOWED_METHODS);
+    res.header('Access-Control-Allow-Credentials', true);
     res.header('Access-Control-Allow-Headers', requestHeaders);
     return res.end();
   }
@@ -57,6 +63,12 @@ app.use((req, res, next) => {
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(requestLogger);
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
 app.post('/signin', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
@@ -79,6 +91,8 @@ app.use('/cards', cardRout);
 app.use('/', () => {
   throw new Notfound('Нет такой страницы');
 });
+
+app.use(errorLogger);
 
 app.use(errors());
 
