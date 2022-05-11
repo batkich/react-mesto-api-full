@@ -1,4 +1,4 @@
-export const BASE_URL = 'http://santyagobatkich.students.nomoredomains.xyz';
+export const BASE_URL = 'http://localhost:3030';
 
 export const register = (password, email) => {
   return fetch(`${BASE_URL}/signup`, {
