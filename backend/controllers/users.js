@@ -136,7 +136,7 @@ const login = (req, res, next) => {
         { expiresIn: '7d' },
       );
       res.cookie('jwt', token, {
-        maxAge: 3600000 * 24 * 7, httpOnly: true, samesite: 'None', secure: true, domain: 'santyagobatkich.students.nomoredomains.work',
+        maxAge: 3600000 * 24 * 7, httpOnly: true, SameSite: 'None', secure: true, domain: 'santyagobatkich.students.nomoredomains.work',
       });
       res.send({ token });
     })
