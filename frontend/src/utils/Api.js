@@ -86,7 +86,7 @@ class Api {
 }
 
 const api = new Api({
-  baseUrl: 'http://santyagobatkich.students.nomoredomains.xyz',
+  baseUrl: 'http://santyagobatkich.students.nomoredomains.work',
   credentials: 'include',
   headers: {
     'Content-Type': 'application/json',
