@@ -65,18 +65,18 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(requestLogger);
-app.get('/api/crash-test', () => {
+app.get('/crash-test', () => {
   setTimeout(() => {
     throw new Error('Сервер сейчас упадёт');
   }, 0);
 });
-app.post('/api/signin', celebrate({
+app.post('/signin', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
     password: Joi.string().required(),
   }),
 }), login);
-app.post('/api/signup', celebrate({
+app.post('/signup', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
     password: Joi.string().required(),
@@ -87,9 +87,9 @@ app.post('/api/signup', celebrate({
   }),
 }), userCreate);
 app.use(auth);
-app.use('/api/users', userRout);
-app.use('/api/cards', cardRout);
-app.use('/api/', () => {
+app.use('/users', userRout);
+app.use('/cards', cardRout);
+app.use('/', () => {
   throw new Notfound('Нет такой страницы');
 });
 
