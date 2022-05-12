@@ -9,7 +9,7 @@ function Main(props) {
 
   React.useEffect(() => {
     props.handleheader();
-  });
+  }, [props]);
 
   return (
     <main className="content">
