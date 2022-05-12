@@ -67,7 +67,7 @@ function App() {
   function tokenCheck() {
     const token = localStorage.getItem("token");
     if (token) {
-      Auth.getContent()
+      Auth.getContent(token)
         .then((res) => {
           if (res) {
             setUserData(res.email);

@@ -27,7 +27,6 @@ export const register = (password, email) => {
 export const authorize = (password, email) => {
   return fetch(`${BASE_URL}/signin`, {
     method: 'POST',
-    credentials: 'include',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
@@ -37,6 +36,7 @@ export const authorize = (password, email) => {
     .then((response => response.json()))
     .then((data) => {
       if (data.token) {
+
         localStorage.setItem('token', data.token);
         return data.token;
       }
@@ -44,14 +44,13 @@ export const authorize = (password, email) => {
     .catch(err => console.log(err))
 };
 
-export const getContent = () => {
+export const getContent = (token) => {
   return fetch(`${BASE_URL}/users/me`, {
     method: 'GET',
-    credentials: 'include',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
-
+      'Authorization': `Bearer ${token}`,
     }
   })
     .then(res => res.json())
