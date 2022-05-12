@@ -58,7 +58,7 @@ function App() {
           console.log(`Ошибка: ${err}`);
         });
     }
-  }, [loggedIn]);
+  }, [loggedIn, userData]);
 
   React.useEffect(() => {
     tokenCheck();
