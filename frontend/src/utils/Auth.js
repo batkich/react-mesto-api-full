@@ -24,6 +24,8 @@ export const register = (password, email) => {
     .catch((err) => console.log(err));
 };
 
+//авторизация
+
 export const authorize = (password, email) => {
   return fetch(`${BASE_URL}/signin`, {
     method: 'POST',
