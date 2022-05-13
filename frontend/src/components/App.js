@@ -48,7 +48,7 @@ function App() {
   const history = useHistory();
 
   React.useEffect(() => {
-    if (loggedIn) {
+    if (loggedIn && localStorage.getItem('token')) {
       Promise.all([api.getInitialCards(), api.getProfileInfo()])
         .then(([cards, userData]) => {
           setCards(cards);
@@ -58,7 +58,7 @@ function App() {
           console.log(`Ошибка: ${err}`);
         });
     }
-  }, [loggedIn, userData]);
+  }, [loggedIn]);
 
   React.useEffect(() => {
     tokenCheck();
