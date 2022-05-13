@@ -48,8 +48,9 @@ function App() {
   const history = useHistory();
 
   React.useEffect(() => {
-    if (loggedIn && localStorage.getItem('token')) {
-      Promise.all([api.getInitialCards(), api.getProfileInfo()])
+    const token = localStorage.getItem("token");
+    if (token) {
+      Promise.all([api.getInitialCards(token), api.getProfileInfo(token)])
         .then(([cards, userData]) => {
           setCards(cards);
           setCurrentUser(userData);
@@ -144,9 +145,9 @@ function App() {
 
   function handleCardLike(card) {
     const isLiked = card.likes.some((i) => i === currentUser._id);
-
+    const token = localStorage.getItem("token");
     api
-      .changeLikeCardStatus(card._id, !isLiked)
+      .changeLikeCardStatus(token, card._id, !isLiked)
       .then((newCard) => {
         setCards((state) =>
           state.map((c) => (c._id === card._id ? newCard : c))
@@ -158,8 +159,9 @@ function App() {
   }
 
   function handleCardDelete(card) {
+    const token = localStorage.getItem("token");
     api
-      .deleteCard(card._id)
+      .deleteCard(token, card._id)
       .then(() => {
         setCards((state) => state.filter((c) => c._id !== card._id));
       })
@@ -169,8 +171,9 @@ function App() {
   }
 
   function handleUpdateUser(data) {
+    const token = localStorage.getItem("token");
     api
-      .setProfileInfo(data)
+      .setProfileInfo(token, data)
       .then((res) => {
         setCurrentUser(res);
         setIsEditProfilePopupOpen(false);
@@ -181,8 +184,9 @@ function App() {
   }
 
   function handleUpdateAvatar(data) {
+    const token = localStorage.getItem("token");
     api
-      .setNewAvatar(data)
+      .setNewAvatar(token ,data)
       .then((res) => {
         setCurrentUser(res);
         setIsEditAvatarPopupOpen(false);
@@ -193,8 +197,9 @@ function App() {
   }
 
   function handleAddPlaceSubmit(data) {
+    const token = localStorage.getItem("token");
     api
-      .setNewCard(data)
+      .setNewCard(token, data)
       .then((res) => {
         setCards([res, ...cards]);
         setIsAddPlacePopupOpen(false);
