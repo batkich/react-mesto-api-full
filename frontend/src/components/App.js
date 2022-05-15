@@ -126,6 +126,10 @@ function App() {
     Auth.authorize(password, email)
       .then((res) => {
         if (res) {
+          api.getProfileInfo(res)
+          .then((data) => {
+            setCurrentUser(data);
+          });
           setLoggedIn(true);
           history.push("/");
           setUserData(email);
