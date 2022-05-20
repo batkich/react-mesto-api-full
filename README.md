@@ -7,4 +7,4 @@
 **Сайт**
 
 * [Ссылка на страницу](http://santyagobatkich.students.nomoredomains.xyz)
-* [Ссылка на backend](http://santyagobatkich.students.nomoredomains.work)
+* [Ссылка на backend](http://santyagobatkich.students.nomoredomains.work).
